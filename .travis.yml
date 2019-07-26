@@ -50,7 +50,7 @@ script:
   - cp ${ACTIVEMQ_DISTRIBUTION_NAME}/lib/geronimo-j2ee-management_1.1_spec-1.0.1.jar ${DISTRIBUTION_NAME}/bre/lib
   - cp ${ACTIVEMQ_DISTRIBUTION_NAME}/lib/hawtbuf-1.11.jar ${DISTRIBUTION_NAME}/bre/lib
 
-  - cd src
+  - cd srcs
 
   - ballerina init
 
