@@ -28,7 +28,7 @@ An extension implements a function-specific communication pattern (protocol) and
 
 
 
-# Requirements and constraints
+# Requirements and constraints..
 
 - Asynchronous messaging.
 - Encrypted and unencrypted channels.
