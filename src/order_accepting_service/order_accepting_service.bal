@@ -52,13 +52,13 @@ service orderAcceptingService on httpListener {
         produces: ["application/json"] }
     resource function place(http:Caller caller, http:Request request) returns error? {
         http:Response response = new;
-        DevicePaylaod newDevicePayload = {};
+        DevicePayload newDevicePayload = {};
         json reqPayload = {};
 
         // Try parsing the JSON payload from the request
-        var payload = request.getJsonPayload();
-        if (payload is json) {
-            reqPayload = payload;
+        var payloads = request.getJsonPayload();
+        if (payloads is json) {
+            reqPayload = payloads;
         } else {
             response.statusCode = 400;
             response.setJsonPayload({ "Message": "Invalid payload - Not a valid JSON payload" });
