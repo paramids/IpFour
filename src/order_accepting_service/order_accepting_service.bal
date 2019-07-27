@@ -89,7 +89,7 @@ service orderAcceptingService on httpListener {
         var DevicePayloadDetails = json.convert(newDevicePayload);
         // Create a JMS message
         if (DevicePayloadDetails is json) {
-            var queueMessage = jmsSession.createTextMessage(orderDetails.toString());
+            var queueMessage = jmsSession.createTextMessage(DevicePayloadDetails.toString());
             // Send the message to the JMS queue
             if (queueMessage is jms:Message) {
                 _ = check jmsProducer->send(queueMessage);
