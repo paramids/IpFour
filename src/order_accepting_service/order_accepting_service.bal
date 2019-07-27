@@ -1,6 +1,6 @@
-// Copyright (c) 2018 WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+// Copyright (c) 2018 Ipanera Labs (http://www.wso2.org) All Rights Reserved.
 //
-// WSO2 Inc. licenses this file to you under the Apache License,
+// Ipanera Labs licenses this file to you under the Apache License,
 // Version 2.0 (the "License"); you may not use this file except
 // in compliance with the License.
 // You may obtain a copy of the License at
@@ -19,17 +19,15 @@ import ballerina/http;
 import ballerina/jms;
 
 // Type definition for an order
-type Order record {
-    string customerID?;
-    string productID?;
-    string quantity?;
-    string orderType?;
+type DevicePayload record {
+    string clientID?;
+    string deviceID?;
+    string payload?;
 };
 
 // Initialize a JMS connection with the provider
 // 'providerUrl' and 'initialContextFactory' vary based on the JMS provider you use
-// 'Apache ActiveMQ' has been used as the message broker in this example
-//Main entry point
+// 'Apache ActiveMQ' has been used as the message broker in this exampl
 jms:Connection jmsConnection = new({
         initialContextFactory: "org.apache.activemq.jndi.ActiveMQInitialContextFactory",
         providerUrl: "tcp://localhost:61616"
@@ -41,20 +39,20 @@ jms:Session jmsSession = new(jmsConnection, {
     });
 
 // Initialize a queue sender using the created session
-jms:QueueSender jmsProducer = new(jmsSession, queueName = "Order_Queue");
+jms:QueueSender jmsProducer = new(jmsSession, queueName = "IPC_Queue");
 
-//export http listner port on 9090
+//export http listener port on 9090
 listener http:Listener httpListener = new(9090);
 
 // Order Accepting Service, which allows users to place order online
-@http:ServiceConfig { basePath: "/placeOrder" }
+@http:ServiceConfig { basePath: "/hipcv1" }
 service orderAcceptingService on httpListener {
     // Resource that allows users to place an order 
     @http:ResourceConfig { methods: ["POST"], consumes: ["application/json"],
         produces: ["application/json"] }
     resource function place(http:Caller caller, http:Request request) returns error? {
         http:Response response = new;
-        Order newOrder = {};
+        DevicePaylaod newDevicePayload = {};
         json reqPayload = {};
 
         // Try parsing the JSON payload from the request
@@ -68,13 +66,13 @@ service orderAcceptingService on httpListener {
             return;
         }
 
-        json customerID = reqPayload.customerID;
-        json productID = reqPayload.productID;
-        json quantity = reqPayload.quantity;
-        json orderType = reqPayload.orderType;
+        json clientID = reqPayload.clientID;
+        json deviceID = reqPayload.deviceID;
+        json payload = reqPayload.payload;
+
 
         // If payload parsing fails, send a "Bad Request" message as the response
-        if (customerID == null || productID == null || quantity == null || orderType == null) {
+        if (clientID == null || deviceID == null || payload == null) {
             response.statusCode = 400;
             response.setJsonPayload({ "Message": "Bad Request - Invalid payload" });
             _ = check caller->respond(response);
@@ -82,23 +80,23 @@ service orderAcceptingService on httpListener {
         }
 
         // Order details
-        newOrder.customerID = customerID.toString();
-        newOrder.productID = productID.toString();
-        newOrder.quantity = quantity.toString();
-        newOrder.orderType = orderType.toString();
+        newDevicePayload.clientID = clientID.toString();
+        newDevicePayload.deviceID = deviceID.toString();
+        newDevicePayload.payload = payload.toString();
+
 
         json responseMessage;
-        var orderDetails = json.convert(newOrder);
+        var DevicePayloadDetails = json.convert(newDevicePayload);
         // Create a JMS message
-        if (orderDetails is json) {
+        if (DevicePayloadDetails is json) {
             var queueMessage = jmsSession.createTextMessage(orderDetails.toString());
             // Send the message to the JMS queue
             if (queueMessage is jms:Message) {
                 _ = check jmsProducer->send(queueMessage);
                 // Construct a success message for the response
                 responseMessage = { "Message": "Your order is successfully placed" };
-                log:printInfo("New order added to the JMS queue; customerID: '" + newOrder.customerID +
-                        "', productID: '" + newOrder.productID + "';");
+                log:printInfo("New order added to the JMS queue; customerID: '" + newDevicePayload.clientID +
+                        "', productID: '" + newDevicePayload.deviceID + "';");
             } else {
                 responseMessage = { "Message": "Error occured while placing the order" };
                 log:printError("Error occured while adding the order to the JMS queue");
