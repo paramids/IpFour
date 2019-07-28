@@ -15,7 +15,7 @@
 // under the License.
 
 //This code attempts to create an MQTT service which all clients subsribe. The subscription server uses
-//Apache ActiveMQ Artemis as an embedded message brokering service
+//Apache ActiveMQ Artemis as an embedded message brokering service. This service implements the basic ipc protocol
 
 import ballerina/artemis;
 import ballerina/http;
