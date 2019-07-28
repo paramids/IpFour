@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="BALLERINA_REPOSITORY &lt;IpFour&gt;">
+    <CLASSES>
+      <root url="file:///usr/lib/ballerina/ballerina-0.991.0/lib/repo/ballerinax" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file:///usr/lib/ballerina/ballerina-0.991.0/lib/repo/ballerinax" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>
