@@ -25,14 +25,14 @@ import ballerina/log;
 artemis:Connection con = new("tcp://localhost:60616");
 artemis:Session session = new(con);
 
-@artemis:ServiceConfig{
-    queueConfig:{
-        queueName: "queue1",
-        addressName: "/ipc/ver1/"
+@artemis:ServiceConfig {
+    queueConfig: {
+        queueName: "my_queue",
+        addressName: "/ipc/v1/#",
+        routingType: artemis:MULTICAST
     }
-
-
 }
+
 service artemisconsumer on new artemis:Listener(session){
 
     resource function onMessage(artemis:Message message){
