@@ -27,7 +27,7 @@ artemis:Session session = new(con);
 
 @artemis:ServiceConfig {
     queueConfig: {
-        // queueName: "my_queue",
+        queueName: "main_queue",
         addressName: "/ipc/v1/#",
         routingType: artemis:MULTICAST
     }
