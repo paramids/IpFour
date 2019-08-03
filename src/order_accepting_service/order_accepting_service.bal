@@ -45,7 +45,7 @@ jms:QueueSender jmsProducer = new(jmsSession, queueName = "IPC_Queue");
 listener http:Listener httpListener = new(9090);
 
 // Order Accepting Service, which allows users to place order online
-@http:ServiceConfig { basePath: "/hipcv1/appv1" }
+@http:ServiceConfig { basePath: "/hipcv1/place" }
 service orderAcceptingService on httpListener {
     // Resource that allows users to place an order 
     @http:ResourceConfig { methods: ["POST"], consumes: ["application/json"],
