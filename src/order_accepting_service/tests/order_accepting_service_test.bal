@@ -30,7 +30,7 @@ function testResourceOrderDelivey() {
     json payload = { "clientID": "C000", "deviceID": "D002", "payload": "40000"};
     req.setJsonPayload(payload);
     // Send a 'post' request and obtain the response
-    var response = httpEndpoint3->post("/hipcv1/place", req);
+    var response = httpEndpoint3->post("/placeOrder/place", req);
     if (response is http:Response) {
         // Expected response code is 200
         test:assertEquals(response.statusCode, 200, msg = "service did not respond with 200 OK signal!");
