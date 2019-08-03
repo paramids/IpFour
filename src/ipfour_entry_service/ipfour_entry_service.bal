@@ -27,13 +27,13 @@ artemis:Session session = new(con);
 
 @artemis:ServiceConfig {
     queueConfig: {
-        queueName: "my_queue",
+        // queueName: "my_queue",
         addressName: "/ipc/v1/#",
         routingType: artemis:MULTICAST
     }
 }
 
-service artemisconsumer on new artemis:Listener(session){
+service artemisconsumer on new artemis:Listener({host: "localhost", port:61616}){
 
     resource function onMessage(artemis:Message message){
         var payload = message.getPayload();
