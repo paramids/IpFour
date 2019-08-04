@@ -15,6 +15,7 @@ jdk:
   - openjdk8
 
 script:
+  - apt-get install libaio
   - BALLERINA_VERSION="${VERSION:-0.991.1-SNAPSHOT}"
   - echo -e "\033[36m${BALLERINA_VERSION}\033[m"
 
