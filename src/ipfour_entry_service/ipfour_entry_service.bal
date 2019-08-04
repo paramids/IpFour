@@ -31,7 +31,7 @@ import ballerina/log;
     }
 }
 
-service artemisconsumer on new artemis:Listener({host: "localhost", port:61616}){
+service artemisConsumer on new artemis:Listener({host: "localhost", port:61616}){
 
     resource function onMessage(artemis:Message message){
         var payload = message.getPayload();
