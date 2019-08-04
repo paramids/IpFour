@@ -16,7 +16,7 @@ jdk:
 
 before_install:
   - sudo apt-get update
-  - apt-get install libaio
+  - sudo apt-get install libaio
 
 script:
 
