@@ -48,8 +48,8 @@ script:
   - ARTEMIS_DISTRIBUTION_NAME=apache-artemis-${ARTEMIS_VERSION}
   - ARTEMIS_HOME=/var/lib
 
-  - echo -e "\033[36mhttps://archive.apache.org/dist/activemq/activemq-artemis/${ACTIVEMQ_VERSION}/${ACTIVEMQ_DISTRIBUTION_NAME}-bin.tar.gz\033[m"
-  - wget https://archive.apache.org/dist/activemq/activemq-artemis/${ACTIVEMQ_VERSION}/${ACTIVEMQ_DISTRIBUTION_NAME}-bin.tar.gz
+  - echo -e "\033[36mhttps://archive.apache.org/dist/activemq/activemq-artemis/${ARTEMIS_VERSION}/${ARTEMIS_DISTRIBUTION_NAME}-bin.tar.gz\033[m"
+  - wget https://archive.apache.org/dist/activemq/activemq-artemis/${ARTEMIS_VERSION}/${ARTEMIS_DISTRIBUTION_NAME}-bin.tar.gz
 
   - tar xzf ${ARTEMIS_DISTRIBUTION_NAME}-bin.tar.gz
   - ./${ARTEMIS_DISTRIBUTION_NAME}/bin/artemis create /tmp/mybroker --user admin --password admin123 --allow-anonymous Y
