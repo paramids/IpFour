@@ -22,8 +22,6 @@ import ballerina/http;
 import ballerina/log;
 
 
-artemis:Connection con = new("tcp://localhost:60616");
-artemis:Session session = new(con);
 
 @artemis:ServiceConfig {
     queueConfig: {
