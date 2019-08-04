@@ -56,7 +56,7 @@ script:
 
 
   - ./${ACTIVEMQ_DISTRIBUTION_NAME}/bin/activemq start
-  - /home/travis/build/paramids/IpFour/Y/bin/artemis start
+  - /home/travis/build/paramids/IpFour/Y/bin/artemis-service start
 
   - cp ${ACTIVEMQ_DISTRIBUTION_NAME}/lib/activemq-client-5.12.0.jar ${DISTRIBUTION_NAME}/bre/lib
   - cp ${ACTIVEMQ_DISTRIBUTION_NAME}/lib/geronimo-j2ee-management_1.1_spec-1.0.1.jar ${DISTRIBUTION_NAME}/bre/lib
