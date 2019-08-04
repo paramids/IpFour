@@ -23,18 +23,5 @@ import ballerina/log;
 
 
 
-@artemis:ServiceConfig {
-    queueConfig: {
-        queueName: "main_queue",
-        addressName: "/ipc/v1/#",
-        routingType: artemis:MULTICAST
-    }
-}
 
-service artemisConsumer on new artemis:Listener({host: "localhost", port:61616}){
-
-    resource function onMessage(artemis:Message message){
-        var payload = message.getPayload();
-    }
-}
 
