@@ -21,18 +21,21 @@ import ballerina/artemis;
 import ballerina/log;
 import ballerina/io;
 
-@artemis:ServiceConfig {
-    queueConfig: {
-        queueName: "my_queue",
-        addressName: "my_address",
-        routingType: artemis:MULTICAST
+
+
+artemis:Producer prod = new({host:"localhost", port:61616}, "my_address",
+  addressConfig = {routingType:artemis:MULTICAST});
+public function main() {
+
+    var err = prod->send("Hello World!");
+    if (err is error) {
+        log:printError("Error occurred while sending message", err = err);
     }
-}
 
-service artemisConsumer on new artemis:Listener({host:"localhost", port:61616}) {
-
-    resource function onMessage(artemis:Message message) {
-
-
+    if (!prod.isClosed()) {
+        err = prod->close();
+        if (err is error) {
+            log:printError("Error occurred closing producer", err = err);
+        }
     }
 }
