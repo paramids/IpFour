@@ -18,10 +18,21 @@
 //Apache ActiveMQ Artemis as an embedded message brokering service. This service implements the basic ipc protocol
 
 import ballerina/artemis;
-import ballerina/http;
 import ballerina/log;
+import ballerina/io;
+
+@artemis:ServiceConfig {
+    queueConfig: {
+        queueName: "my_queue",
+        addressName: "my_address",
+        routingType: artemis:MULTICAST
+    }
+}
+
+service artemisConsumer on new artemis:Listener({host:"localhost", port:61616}) {
+
+    resource function onMessage(artemis:Message message) {
 
 
-
-
-
+    }
+}
