@@ -1,0 +1,5 @@
+[2019-08-05 12:22:46,208] WARN  {org.ballerinalang.messaging.artemis.externimpl.producer.CreateProducer} - Address with the name my_address already exists.   
+[2019-08-05 12:53:05,828] WARN  {org.ballerinalang.messaging.artemis.externimpl.producer.CreateProducer} - Address with the name my_address already exists.   
+[2019-08-05 13:25:31,954] WARN  {org.ballerinalang.messaging.artemis.externimpl.producer.CreateProducer} - Address with the name kpi/v1 already exists.   
+[2019-08-05 13:26:07,647] WARN  {org.ballerinalang.messaging.artemis.externimpl.producer.CreateProducer} - Address with the name kp1/app1 already exists.   
+[2019-08-05 18:03:31,420] WARN  {org.ballerinalang.messaging.artemis.externimpl.producer.CreateProducer} - Address with the name kp1.app1.instance1.extension1 already exists.   
