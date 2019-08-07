@@ -22,6 +22,7 @@
 import ballerina/artemis;
 import ballerina/log;
 import ballerina/io;
+import ballerina
 
 @artemis:ServiceConfig {
     queueConfig: {
